@@ -1,0 +1,112 @@
+/* =========================================================================
+   Proposition 3 — « Nuit gourmande »
+   Mêmes teintes, version sombre : espresso, or, crème.
+   Playfair Display + DM Sans. Les produits s'éclairent comme en vitrine.
+   ========================================================================= */
+:root {
+  --bg: #1b1310;
+  --surface: #241a15;
+  --surface-2: #2e221b;
+  --elev: #2a1f19;
+  --ink: #f1e8da;
+  --ink-soft: #bcab95;
+  --accent: #c9a96e;
+  --accent-strong: #d9bd86;
+  --accent-ink: #1b1310;
+  --brand: #130d0b;
+  --brand-ink: #f1e8da;
+  --line: rgba(241, 232, 218, .12);
+  --tile: #efe6d8;
+  --logo: #f1e8da;
+  --topbar-bg: #130d0b;
+  --topbar-ink: rgba(241, 232, 218, .65);
+  --header-bg: rgba(27, 19, 16, .86);
+  --header-ink: #f1e8da;
+  --header-logo: #e9d6b0;
+  --footer-bg: #130d0b;
+  --footer-ink: rgba(241, 232, 218, .6);
+  --footer-head: #f1e8da;
+  --footer-logo: #e9d6b0;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --display-weight: 400;
+  --display-tracking: -.005em;
+  --radius: 4px;
+  --radius-sm: 3px;
+  --btn-radius: 2px;
+  --shadow: 0 20px 50px -20px rgba(0, 0, 0, .6);
+  color-scheme: dark;
+}
+h1 { font-size: clamp(3rem, 7.4vw, 6rem); line-height: 1; }
+h1 em, h2 em { font-style: italic; color: var(--accent); }
+.btn { font-weight: 500; letter-spacing: .06em; }
+.btn-ghost { color: var(--ink); border-color: rgba(241, 232, 218, .3); }
+.btn-ghost:hover { background: var(--ink); color: var(--bg); }
+.eyebrow { color: var(--accent); }
+.site-header { border-bottom-color: var(--line); }
+.nav-list > li > a[aria-current], .nav-list > li > a:hover { color: var(--accent); }
+.topbar a:hover { color: var(--ink); }
+
+/* --- héros plein écran --- */
+.hero-nuit { position: relative; min-height: min(86vh, 860px); display: grid; grid-template-rows: 1fr auto; isolation: isolate; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; z-index: -1; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 56%; filter: saturate(.9) contrast(1.05); }
+.hero-bg::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(27, 19, 16, .97) 0%, rgba(27, 19, 16, .86) 38%, rgba(27, 19, 16, .25) 75%, rgba(27, 19, 16, .15) 100%),
+    linear-gradient(0deg, rgba(27, 19, 16, 1) 0%, rgba(27, 19, 16, 0) 30%);
+}
+.hero-content { align-self: center; padding-block: clamp(56px, 8vw, 110px) 2rem; }
+.hero-content > * { max-width: 620px; }
+.hero-content .lead { color: rgba(241, 232, 218, .8); }
+.eyebrow .rule { display: inline-block; width: 40px; height: 1px; background: var(--accent); vertical-align: middle; margin-right: 1rem; }
+.hero-foot .stats { margin: 0; padding-block: 1.75rem 2.5rem; border-top: 1px solid var(--line); }
+.hero-foot .stats strong { color: var(--accent); }
+
+/* --- rayons : vitrines éclairées --- */
+.cat-tile { background: var(--elev); border-color: var(--line); }
+.cat-tile:hover { border-color: rgba(201, 169, 110, .45); }
+.cat-media { background: var(--tile); }
+.cat-go { border-color: var(--line); }
+.cat-body strong { font-size: 1.3rem; }
+
+.nouveautes { background: var(--surface); }
+.rail-nav button { border-color: var(--line); }
+.rail-nav button:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+.about-media { position: relative; overflow: visible; }
+.about-media img { border-radius: var(--radius); }
+.about-media::before { content: ""; position: absolute; inset: 18px -18px -18px 18px; border: 1px solid rgba(201, 169, 110, .5); border-radius: var(--radius); z-index: -1; }
+.about-grid { isolation: isolate; }
+.about-body .lead { color: var(--ink); }
+.engagements .ico { background: var(--elev); color: var(--accent); }
+
+.temoignages { background: var(--surface); }
+.quote { background: var(--elev); border-color: var(--line); }
+.quote blockquote { font-style: italic; }
+
+.mini-card { background: var(--elev); }
+.mini-card .ico { background: var(--surface-2); color: var(--accent); }
+.visit { background: var(--brand); }
+.visit-media { position: relative; }
+.page-hero { background: var(--surface); }
+.page-hero-media { background: var(--tile); }
+.chips { background: rgba(27, 19, 16, .92); backdrop-filter: blur(10px); }
+.chips a[aria-current] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.note { background: var(--elev); border: 1px solid var(--line); }
+.cta-inner { background: var(--elev); border: 1px solid var(--line); }
+.pager a:hover { background: var(--elev); }
+.form-ok, .contact-card { background: var(--elev); }
+.contact-form input, .contact-form select, .contact-form textarea { background: var(--surface); }
+.hours li.today { background: rgba(201, 169, 110, .16); }
+.mega { border-top-color: var(--line); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .7); }
+.mega-col a:hover, .mega-col a[aria-current] { background: var(--surface-2); }
+.timeline .year { color: var(--accent); font-style: italic; }
+.maquette-switch { background: rgba(241, 232, 218, .92); color: #1b1310; }
+.maquette-switch a, .maquette-switch .ms-close { color: #1b1310; }
+.ms-links a[aria-current] { background: #1b1310; color: #f1e8da; }
+
+@media (max-width: 960px) {
+  .hero-bg::after { background: linear-gradient(0deg, rgba(27, 19, 16, 1) 0%, rgba(27, 19, 16, .82) 55%, rgba(27, 19, 16, .45) 100%); }
+}

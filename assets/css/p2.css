@@ -1,0 +1,126 @@
+/* =========================================================================
+   Proposition 2 — « Lin & caramel »
+   Mêmes teintes, version claire : lin, caramel, cacao.
+   Esprit magazine : Cormorant Garamond + Manrope, beaucoup d'air.
+   ========================================================================= */
+:root {
+  --bg: #f7f2ea;
+  --surface: #efe7da;
+  --surface-2: #e7dccb;
+  --elev: #fffdf9;
+  --ink: #3a2a20;
+  --ink-soft: #76655a;
+  --accent: #8f5f3a;
+  --accent-strong: #7a4e2e;
+  --accent-ink: #fffaf3;
+  --gold: #c4a26a;
+  --brand: #3a2a20;
+  --brand-ink: #f3ebdf;
+  --line: rgba(58, 42, 32, .14);
+  --tile: #ece3d5;
+  --logo: #3a2a20;
+  --topbar-bg: #3a2a20;
+  --topbar-ink: rgba(243, 235, 223, .8);
+  --header-bg: rgba(247, 242, 234, .9);
+  --header-ink: #3a2a20;
+  --header-logo: #3a2a20;
+  --footer-bg: #2f221a;
+  --footer-ink: rgba(243, 235, 223, .7);
+  --footer-head: #f3ebdf;
+  --footer-logo: #f3ebdf;
+  --font-display: "Cormorant Garamond", Garamond, serif;
+  --font-body: "Manrope", system-ui, sans-serif;
+  --display-weight: 500;
+  --display-tracking: -.01em;
+  --radius: 6px;
+  --radius-sm: 4px;
+  --btn-radius: 3px;
+}
+body { font-size: 16px; }
+h1 { font-size: clamp(3.4rem, 9vw, 8rem); line-height: .92; letter-spacing: -.02em; }
+h2 { font-size: clamp(2.4rem, 4.6vw, 3.8rem); line-height: 1; }
+h3 { font-size: 1.45rem; }
+h1 em, h2 em { font-style: italic; color: var(--accent); font-weight: 400; }
+.btn { text-transform: uppercase; font-size: .78rem; letter-spacing: .14em; font-weight: 600; padding: 1.1em 1.7em; }
+.btn-header { font-size: .72rem; }
+.eyebrow { font-size: .72rem; letter-spacing: .22em; color: var(--accent); }
+.lead { font-size: 1.12rem; }
+.nav-list > li > a { font-size: .9rem; font-weight: 500; }
+.site-header { border-bottom-color: var(--line); }
+
+/* --- héros éditorial --- */
+.hero-edito { padding-block: clamp(40px, 6vw, 80px) clamp(56px, 8vw, 100px); }
+.hero-head { display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: end; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+.hero-head h1 { margin: 0; }
+.hero-head h1 em { display: block; padding-left: clamp(1rem, 8vw, 7rem); }
+.hero-intro .lead { color: var(--ink); margin: 0; }
+.hero-intro .btn-row { margin-top: 1.75rem; }
+.hero-collage { display: grid; grid-template-columns: 1.25fr 1fr .9fr; gap: clamp(16px, 2.5vw, 32px); align-items: start; }
+.hero-collage figure { margin: 0; }
+.hero-collage figure img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); }
+.hero-collage figcaption { padding-top: .75rem; font-size: .8rem; color: var(--ink-soft); font-style: italic; }
+.hero-collage .c1 img { aspect-ratio: 5 / 4; object-position: 50% 62%; }
+.hero-collage .c2 { margin-top: clamp(2rem, 6vw, 5rem); }
+.hero-collage .c2 img { aspect-ratio: 4 / 5; object-position: 50% 30%; }
+.hero-collage .c3 { margin-top: clamp(1rem, 3vw, 2.5rem); }
+.hero-collage .c3 img { aspect-ratio: 1; }
+.hero-edito .stats { margin-top: clamp(3rem, 6vw, 5rem); padding-top: 1.75rem; border-top: 1px solid var(--line); justify-content: space-between; max-width: none; }
+.hero-edito .stats li { flex: 1; }
+.hero-edito .stats strong { font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 400; color: var(--ink); }
+
+/* --- rayons : liste magazine --- */
+.cat-grid { gap: clamp(28px, 3vw, 40px) clamp(18px, 2.5vw, 32px); }
+.cat-tile { background: transparent; border: 0; border-radius: 0; overflow: visible; }
+.cat-tile:hover { box-shadow: none; transform: none; }
+.cat-media { border-radius: var(--radius); aspect-ratio: 4 / 3.2; }
+.cat-body { grid-template-columns: auto 1fr; grid-template-rows: auto 1fr; align-items: start; column-gap: 1rem; padding: 1.1rem 3.25rem 0 0; }
+.cat-num { grid-row: span 2; font-family: var(--font-display); font-style: italic; font-size: 2.1rem; font-weight: 400; line-height: 1; letter-spacing: 0; color: var(--gold); }
+.cat-body strong { font-size: 1.55rem; }
+.cat-go { right: 0; bottom: auto; top: 1.2rem; border: 0; }
+.cat-tile:hover .cat-go { background: transparent; color: var(--accent); transform: translateX(4px); }
+.cat-go { transition: transform .3s var(--ease), color .3s; }
+
+.univers { border-top: 1px solid var(--line); }
+.nouveautes { background: var(--surface); }
+.rail-card .product-media { background: var(--elev); aspect-ratio: 4 / 5; }
+.rail-card h3 { font-size: 1.35rem; }
+
+.about-media { aspect-ratio: 4 / 5; }
+.about-body h2 { max-width: 14ch; }
+.engagements .ico { background: var(--elev); }
+
+.temoignages { background: var(--elev); }
+.quotes { gap: clamp(24px, 4vw, 56px); }
+.quote { background: transparent; border: 0; border-top: 1px solid var(--ink); border-radius: 0; padding: 1.75rem 0 0; }
+.quote blockquote { font-size: 1.5rem; font-style: italic; font-weight: 400; line-height: 1.3; }
+.quote blockquote::before { font-style: normal; color: var(--gold); }
+
+.mini-card { background: var(--elev); }
+.visit { background: var(--brand); }
+.visit-media img { object-position: 50% 58%; }
+.page-hero { background: transparent; border-bottom: 1px solid var(--line); }
+.page-hero h1 { font-size: clamp(3rem, 6.5vw, 5.6rem); }
+.page-hero-media { background: var(--tile); }
+.chips { background: rgba(247, 242, 234, .95); backdrop-filter: blur(10px); }
+.chips a[aria-current] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.product-media { background: var(--tile); }
+.product h3 { font-size: 1.5rem; }
+.note { background: var(--elev); border-left: 2px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; }
+.cta-inner { background: var(--elev); border: 1px solid var(--line); }
+.timeline > li { grid-template-columns: 300px 1fr; }
+.visit .eyebrow { color: var(--gold); }
+.year { font-style: italic; font-weight: 400; color: var(--accent); font-size: clamp(2.6rem, 5vw, 4rem); }
+.group-title { font-style: italic; font-weight: 400; }
+
+@media (max-width: 960px) {
+  .hero-head { grid-template-columns: 1fr; }
+  .hero-head h1 em { padding-left: 0; }
+  .hero-collage { grid-template-columns: 1.2fr 1fr; }
+  .hero-collage .c3 { display: none; }
+}
+@media (max-width: 640px) {
+  .hero-collage { grid-template-columns: 1fr; }
+  .hero-collage .c2 { display: none; }
+  .hero-edito .stats { gap: 1rem; }
+  .hero-edito .stats strong { font-size: 2rem; }
+}

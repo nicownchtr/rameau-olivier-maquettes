@@ -1,0 +1,28 @@
+/* Page de choix des propositions */
+:root { --bg: #f6f1ea; --ink: #2e1a13; --soft: #6e5d52; --gold: #a78957; --line: rgba(46, 26, 19, .14); }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 "Jost", system-ui, sans-serif; }
+header { background: #2e1a13; color: #f3ece2; padding: 40px 16px 36px; text-align: center; }
+header p { margin: 14px 0 0; font-family: "Forum", serif; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+.logo { display: block; margin: 0 auto; width: 190px; aspect-ratio: 1070 / 356; background: #fff; -webkit-mask: url(../img/Rameau-Logo.png) center / contain no-repeat; mask: url(../img/Rameau-Logo.png) center / contain no-repeat; }
+main { max-width: 1280px; margin: 0 auto; padding: 48px 16px 80px; }
+.choices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.choice { color: var(--ink); display: flex; flex-direction: column; background: #fff; border-radius: 16px; overflow: hidden; text-decoration: none; border: 1px solid var(--line); transition: transform .35s cubic-bezier(.2, .7, .2, 1), box-shadow .35s; }
+.choice:hover { transform: translateY(-6px); box-shadow: 0 30px 60px -30px rgba(46, 26, 19, .45); }
+.shot { display: block; aspect-ratio: 16 / 11; background: #e9e1d5; overflow: hidden; border-bottom: 1px solid var(--line); }
+.shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.choice-body { display: flex; flex-direction: column; gap: 10px; padding: 22px 24px 26px; flex: 1; }
+.choice small { font-size: .75rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+.choice strong { font-family: "Forum", serif; font-weight: 400; font-size: 2rem; line-height: 1.1; }
+.pitch { color: var(--soft); font-size: .95rem; }
+.swatches { display: flex; gap: 6px; margin-top: 4px; }
+.swatches span { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); }
+.fonts { font-size: .82rem; color: var(--soft); }
+.open { margin-top: auto; padding-top: 8px; font-weight: 500; color: var(--ink); }
+.notes { margin-top: 56px; background: #fff; border-radius: 16px; border: 1px solid var(--line); padding: clamp(24px, 4vw, 44px); }
+.notes h2 { font-family: "Forum", serif; font-weight: 400; font-size: 1.9rem; margin: 0 0 1rem; }
+.notes ul { margin: 0; padding-left: 1.2rem; display: grid; gap: .6rem; }
+.notes li { color: var(--soft); }
+.notes li strong { color: var(--ink); font-weight: 600; }
+.hint { margin: 1.5rem 0 0; padding: 14px 18px; border-radius: 10px; background: var(--bg); font-size: .92rem; }
+@media (max-width: 960px) { .choices { grid-template-columns: 1fr; max-width: 560px; margin: 0 auto; } }
