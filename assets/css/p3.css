@@ -99,7 +99,7 @@ h1 em, h2 em { font-style: italic; color: var(--accent); }
 .pager a:hover { background: var(--elev); }
 .form-ok, .contact-card { background: var(--elev); }
 .contact-form input, .contact-form select, .contact-form textarea { background: var(--surface); }
-.hours li.today { background: rgba(201, 169, 110, .16); }
+.hours:not(.hours-compact) li.today { background: rgba(201, 169, 110, .16); }
 .mega { border-top-color: var(--line); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .7); }
 .mega-col a:hover, .mega-col a[aria-current] { background: var(--surface-2); }
 .timeline .year { color: var(--accent); font-style: italic; }

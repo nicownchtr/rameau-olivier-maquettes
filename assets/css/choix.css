@@ -26,3 +26,4 @@ main { max-width: 1280px; margin: 0 auto; padding: 48px 16px 80px; }
 .notes li strong { color: var(--ink); font-weight: 600; }
 .hint { margin: 1.5rem 0 0; padding: 14px 18px; border-radius: 10px; background: var(--bg); font-size: .92rem; }
 @media (max-width: 960px) { .choices { grid-template-columns: 1fr; max-width: 560px; margin: 0 auto; } }
+.choice small .new { display: inline-block; margin-left: .5rem; padding: .15em .6em; border-radius: 999px; background: #2e1a13; color: #f3ece2; font-weight: 600; letter-spacing: .1em; }

@@ -1,0 +1,76 @@
+/* =========================================================================
+   Proposition 4 — « Arcades de nuit »
+   Mise en page de la proposition 1 (arches, Forum + Jost)
+   avec la palette sombre de la proposition 3 (espresso, or, crème).
+   ========================================================================= */
+@import url("p1.css");
+
+:root {
+  --bg: #1b1310;
+  --surface: #241a15;
+  --surface-2: #2e221b;
+  --elev: #2a1f19;
+  --ink: #f1e8da;
+  --ink-soft: #bcab95;
+  --accent: #c9a96e;
+  --accent-strong: #d9bd86;
+  --accent-ink: #1b1310;
+  --brand: #130d0b;
+  --brand-ink: #f1e8da;
+  --line: rgba(241, 232, 218, .12);
+  --tile: #efe6d8;
+  --logo: #f1e8da;
+  --topbar-bg: #c9a96e;
+  --topbar-ink: #1b1310;
+  --header-bg: rgba(19, 13, 11, .96);
+  --header-ink: #f1e8da;
+  --header-logo: #e9d6b0;
+  --footer-bg: #130d0b;
+  --footer-ink: rgba(241, 232, 218, .6);
+  --footer-head: #f1e8da;
+  --footer-logo: #e9d6b0;
+  --shadow: 0 20px 50px -20px rgba(0, 0, 0, .6);
+  color-scheme: dark;
+}
+
+.topbar a:hover { color: #000; }
+.nav-list > li > a[aria-current], .nav-list > li > a:hover { color: var(--accent); }
+.btn-ghost { color: var(--ink); border-color: rgba(241, 232, 218, .3); }
+.btn-ghost:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.site-header { border-bottom-color: var(--line); }
+
+/* héros arches sur fond sombre */
+.arch-main { box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .8); outline: 1px solid rgba(201, 169, 110, .35); outline-offset: 10px; }
+.arch-small { border-color: var(--surface); }
+.hero-badge { background: var(--accent); color: var(--accent-ink); box-shadow: 0 0 0 6px var(--surface); }
+.hero-badge em { color: rgba(27, 19, 16, .7); }
+.stats strong { color: var(--accent); }
+
+/* rayons et nouveautés : vitrines crème sur fond sombre */
+.cat-media { background: var(--tile); }
+.cat-tile:hover .cat-media { box-shadow: 0 30px 60px -25px rgba(0, 0, 0, .8); }
+.cat-go { border-color: var(--line); }
+.rail-card .product-media { background: var(--tile); }
+.nouveautes .rail-nav button { border-color: var(--line); }
+.rail-nav button:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+.about-media { box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .8); }
+.engagements .ico { background: var(--elev); color: var(--accent); }
+.quote { background: var(--elev); border: 1px solid var(--line); box-shadow: none; }
+.mini-card .ico { background: var(--surface-2); color: var(--accent); }
+.page-hero-media { background: var(--elev); }
+.chips { background: rgba(27, 19, 16, .94); backdrop-filter: blur(10px); }
+.chips a[aria-current] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.note { background: var(--elev); border: 1px solid var(--line); }
+.cta-inner { border: 1px solid var(--line); }
+.pager a:hover { background: var(--elev); }
+.form-ok, .contact-card { background: var(--elev); }
+.contact-form input, .contact-form select, .contact-form textarea { background: var(--surface); }
+.hours:not(.hours-compact) li.today { background: rgba(201, 169, 110, .16); }
+.visit .hours li.today { background: rgba(201, 169, 110, .18); }
+.mega { border-top-color: var(--line); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .7); }
+.mega-col a:hover, .mega-col a[aria-current] { background: var(--surface-2); }
+.timeline .year { color: var(--accent); }
+.maquette-switch { background: rgba(241, 232, 218, .92); color: #1b1310; }
+.maquette-switch a, .maquette-switch .ms-close { color: #1b1310; }
+.ms-links a[aria-current] { background: #1b1310; color: #f1e8da; }
