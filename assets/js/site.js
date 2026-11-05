@@ -34,7 +34,11 @@
     /* en-tête qui se resserre au défilement */
     var header = document.querySelector("[data-header]");
     var onScroll = function () {
-      if (header) header.classList.toggle("scrolled", window.scrollY > 40);
+      if (!header) return;
+      /* « collé » dès que l'en-tête atteint le haut de l'écran */
+      var topbar = document.querySelector(".topbar");
+      var seuil = (topbar ? topbar.offsetHeight : 0) - parseFloat(getComputedStyle(header).top || 0);
+      header.classList.toggle("scrolled", window.scrollY >= seuil - 1);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });

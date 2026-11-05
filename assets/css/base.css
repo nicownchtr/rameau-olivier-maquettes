@@ -40,6 +40,7 @@
   --btn-radius: 999px;
   --shadow: 0 1px 2px rgba(46, 26, 19, .06), 0 12px 32px -12px rgba(46, 26, 19, .18);
   --header-h: 84px;
+  --header-shrink: 16px; /* hauteur qui passe sous le bord de l'écran quand l'en-tête est collé */
   --gutter: clamp(16px, 4vw, 40px);
   --ease: cubic-bezier(.2, .7, .2, 1);
 }
@@ -138,8 +139,10 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1
 .topbar .closed-dot { width: 7px; height: 7px; border-radius: 50%; background: #c98a6b; }
 
 /* ---------- en-tête ---------- */
+/* L'en-tête garde toujours la même hauteur dans la page (aucun décalage du contenu) :
+   collé, sa partie haute passe sous le bord de l'écran (top négatif) et son contenu glisse. */
 .site-header {
-  position: sticky; top: 0; z-index: 50;
+  position: sticky; top: calc(-1 * var(--header-shrink)); z-index: 50;
   background: var(--header-bg);
   color: var(--header-ink);
   -webkit-backdrop-filter: saturate(1.4) blur(14px);
@@ -149,8 +152,8 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1
   view-transition-name: site-header;
 }
 .site-header.scrolled { box-shadow: 0 10px 30px -18px rgba(0, 0, 0, .35); border-bottom-color: var(--line); }
-.header-inner { display: flex; align-items: center; gap: 2rem; height: var(--header-h); transition: height .3s var(--ease); }
-.site-header.scrolled .header-inner { height: calc(var(--header-h) - 16px); }
+.header-inner { display: flex; align-items: center; gap: 2rem; height: var(--header-h); transition: transform .3s var(--ease); }
+.site-header.scrolled .header-inner { transform: translateY(calc(var(--header-shrink) / 2)); }
 .brand { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-decoration: none; }
 .brand .logo { --logo: var(--header-logo); width: 150px; transition: width .3s var(--ease); }
 .site-header.scrolled .brand .logo { width: 132px; }
@@ -291,7 +294,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1
 .crumbs .sep { opacity: .5; }
 
 /* puces de rayons */
-.chips { position: sticky; top: calc(var(--header-h) - 16px); z-index: 40; background: var(--bg); border-bottom: 1px solid var(--line); }
+.chips { position: sticky; top: calc(var(--header-h) - var(--header-shrink)); z-index: 40; background: var(--bg); border-bottom: 1px solid var(--line); }
 .chips-inner { display: flex; gap: .5rem; overflow-x: auto; padding-block: .85rem; scrollbar-width: none; }
 .chips-inner::-webkit-scrollbar { display: none; }
 .chips a { flex: none; padding: .45em 1em; border-radius: 999px; border: 1px solid var(--line); font-size: .85rem; text-decoration: none; white-space: nowrap; transition: background .2s, border-color .2s, color .2s; }
@@ -523,7 +526,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1
   .services-grid { grid-template-columns: 1fr; }
   .timeline > li { grid-template-columns: 1fr; gap: 1rem; }
   .cta-inner { flex-direction: column; align-items: flex-start; }
-  .chips { top: calc(var(--header-h) - 16px); }
+  .chips { top: calc(var(--header-h) - var(--header-shrink)); }
 }
 
 @media (max-width: 640px) {

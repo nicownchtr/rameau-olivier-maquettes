@@ -37,6 +37,7 @@
   --btn-radius: 999px;
   --shadow: 0 24px 60px -24px rgba(0, 0, 0, .65);
   --header-h: 132px;
+  --header-shrink: 60px;
   --round: 28px;
   color-scheme: dark;
 }
@@ -59,13 +60,12 @@ h1 em, h2 em { font-style: italic; font-weight: 300; color: var(--accent); }
 .nav-list > li > a { padding-block: .45em; }
 .nav-list > li > a[aria-current], .nav-list > li > a:hover { color: var(--accent); }
 .btn-header { position: absolute; right: var(--gutter); top: 50%; transform: translateY(-50%); }
-.site-header.scrolled .header-inner { flex-wrap: nowrap; justify-content: flex-start; height: 72px; }
+.site-header.scrolled .header-inner { flex-wrap: nowrap; justify-content: flex-start; transform: none; padding-top: var(--header-shrink); }
 .site-header.scrolled .brand { flex-basis: auto; align-items: flex-start; }
 .site-header.scrolled .brand .logo { width: 128px; }
 .site-header.scrolled .brand-tag { display: none; }
 .site-header.scrolled .main-nav { margin-left: auto; }
 .site-header.scrolled .btn-header { position: static; transform: none; }
-.chips { top: 72px; }
 
 /* --- héros « comptoir » : grande photo arrondie + panneau --- */
 .hero-comptoir { padding-block: clamp(20px, 3vw, 36px) clamp(8px, 2vw, 24px); }
@@ -158,13 +158,12 @@ h1 em, h2 em { font-style: italic; font-weight: 300; color: var(--accent); }
   .brand .logo { width: 150px; }
 }
 @media (max-width: 960px) {
-  :root { --header-h: 68px; }
-  .header-inner, .site-header.scrolled .header-inner { flex-wrap: nowrap; justify-content: flex-start; height: var(--header-h); }
+  :root { --header-h: 68px; --header-shrink: 0px; }
+  .header-inner, .site-header.scrolled .header-inner { flex-wrap: nowrap; justify-content: flex-start; height: var(--header-h); padding-top: 0; }
   .brand, .site-header.scrolled .brand { flex-basis: auto; align-items: flex-start; }
   .brand .logo, .site-header.scrolled .brand .logo { width: 128px; }
   .brand-tag { display: none; }
   .main-nav { margin: 0; }
-  .chips { top: 68px; }
   .cat-grid, .products-overview .cat-grid { grid-template-columns: 1fr !important; }
   .hc-strip { flex-direction: column; align-items: flex-start; }
 }
