@@ -53,6 +53,14 @@ PROPOSITIONS = [
         "palette": ["#211813", "#2b211c", "#d0b07a", "#e6d2a8", "#f3eadc"],
         "polices": "Fraunces (titres) · Figtree (texte)",
     },
+    {
+        "id": 6, "nom": "Étiquettes", "css": "p6.css", "hero": "etiquettes", "nouveau": True,
+        "pitch": "Le parti pris le plus audacieux : le vert du rameau d'olivier, un en-tête en store banne, "
+                 "des rayons en étiquettes colorées, un bandeau qui défile et un tampon « depuis 1972 ». "
+                 "L'esprit d'une épicerie de quartier, en version graphique et contemporaine.",
+        "palette": ["#232a17", "#3f4c26", "#c4552f", "#e6a93a", "#f4eddc"],
+        "polices": "Bricolage Grotesque (titres et texte) · Instrument Serif (italiques)",
+    },
 ]
 
 # ---------------------------------------------------------------- catégories
@@ -440,6 +448,32 @@ def hero(prop):
     </div>
   </div>
 </section>"""
+    if prop["hero"] == "etiquettes":
+        rayons = "".join(f"<span>{e(c[2])}</span><i>✦</i>" for c in CATEGORIES)
+        return f"""
+<section class="hero hero-etiq">
+  <div class="container he-grid">
+    <div class="he-text">
+      <p class="eyebrow">Épicerie fine · Saint-Germain-en-Laye</p>
+      <h1>Le temple <em>des saveurs</em></h1>
+      <p class="lead">{intro}</p>
+      {btns}
+      {stats}
+    </div>
+    <div class="he-board">
+      <svg class="he-branch" viewBox="0 0 240 120" aria-hidden="true"><path d="M8 100C60 92 120 70 232 14"/><g><ellipse cx="52" cy="84" rx="16" ry="6" transform="rotate(-40 52 84)"/><ellipse cx="66" cy="102" rx="16" ry="6" transform="rotate(20 66 102)"/><ellipse cx="104" cy="64" rx="17" ry="6.5" transform="rotate(-45 104 64)"/><ellipse cx="122" cy="84" rx="17" ry="6.5" transform="rotate(10 122 84)"/><ellipse cx="156" cy="42" rx="17" ry="6.5" transform="rotate(-50 156 42)"/><ellipse cx="176" cy="58" rx="16" ry="6" transform="rotate(0 176 58)"/><ellipse cx="208" cy="22" rx="14" ry="5.5" transform="rotate(-30 208 22)"/></g><circle class="olive" cx="140" cy="76" r="6"/><circle class="olive" cx="190" cy="44" r="5.5"/></svg>
+      <figure class="he-card he-c1">{img("FRANK-EPICIER-768x1024.jpg", "Frank conseille une cliente devant les huiles d'olive", loading="eager")}<figcaption>Le conseil, avant tout</figcaption></figure>
+      <figure class="he-card he-c2">{img("MARCO-POLO-VERT-V2.jpg", "Thé Marco Polo Mariage Frères", loading="eager")}<figcaption>Marco Polo, Mariage Frères</figcaption></figure>
+      <figure class="he-card he-c3">{img("GAMME-CONFITURES.jpg", "Confitures artisanales", loading="eager")}<figcaption>Confitures maison</figcaption></figure>
+      <span class="he-tag"><strong>N°12</strong>rue de Pologne</span>
+      <span class="he-stamp" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><defs><path id="tampon" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs><text><textPath href="#tampon" textLength="458" lengthAdjust="spacing">Épicerie fine · Saint-Germain-en-Laye ·</textPath></text></svg>
+        <span><small>depuis</small>1972</span>
+      </span>
+    </div>
+  </div>
+  <div class="ticker" aria-hidden="true"><div class="ticker-track"><div>{rayons}</div><div>{rayons}</div></div></div>
+</section>"""
     return f"""
 <section class="hero hero-nuit">
   <div class="hero-bg">{img("FRANK-DEVANT-BOUTIQUE.jpg", "", loading="eager")}</div>
@@ -775,7 +809,7 @@ def index_maquettes():
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/css/choix.css">
 </head><body>
-<header><span class="logo"></span><p>Refonte graphique : cinq propositions</p></header>
+<header><span class="logo"></span><p>Refonte graphique : six propositions</p></header>
 <main>
   <div class="choices">{cartes}</div>
   <section class="notes">

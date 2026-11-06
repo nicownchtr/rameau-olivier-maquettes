@@ -17,7 +17,7 @@ Maquettes HTML statiques de la refonte de https://rameau-olivier.fr/ (épicerie 
 | `outils/dimensions.json` | Dimensions des images (cadrage des images très verticales). |
 | `outils/verifier.py` | Vérifie qu'aucun lien ni ressource locale n'est cassé. |
 | `assets/css/base.css` | Mise en page commune à toutes les propositions (y compris responsive). |
-| `assets/css/p1.css` … `p5.css` | Thème de chaque proposition (couleurs, polices, variantes). `p4.css` importe `p1.css`. |
+| `assets/css/p1.css` … `p6.css` | Thème de chaque proposition (couleurs, polices, variantes). `p4.css` importe `p1.css`. |
 | `assets/css/choix.css` | Page d'accueil des maquettes (choix de la proposition). |
 | `assets/js/site.js` | Interactions : horaires du jour, menu mobile, en-tête collant, carrousel, « Lire la suite », sélecteur de proposition. |
 | `assets/img/`, `assets/fonts/` | Images du site actuel et polices locales. |
@@ -58,4 +58,4 @@ Maquettes HTML statiques de la refonte de https://rameau-olivier.fr/ (épicerie 
 - En-tête collant :
   - il ne doit jamais changer de hauteur dans le flux de la page, sinon le contenu saute au défilement ;
   - utiliser `--header-shrink` (top négatif) et des `transform`.
-- Les 5 propositions partagent `base.css` : après un changement commun, jeter un œil aux 5.
+- Les 6 propositions partagent `base.css` : après un changement commun, jeter un œil aux 6.

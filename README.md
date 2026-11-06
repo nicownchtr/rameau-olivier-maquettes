@@ -1,6 +1,6 @@
 # Le Rameau d'Olivier — maquettes de refonte
 
-Cinq propositions graphiques navigables pour la refonte du site rameau-olivier.fr.
+Six propositions graphiques navigables pour la refonte du site rameau-olivier.fr.
 
 Les pages statiques sont générées par `outils/generer.py`, à partir du contenu du site actuel (`outils/contenu.json`).
 
