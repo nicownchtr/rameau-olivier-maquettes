@@ -8,6 +8,17 @@ Maquettes HTML statiques de la refonte de https://rameau-olivier.fr/ (épicerie 
 - Le propriétaire pilote souvent ces modifications **depuis son téléphone** : réponds en français, de façon courte,
   et termine toujours par les liens directs vers les pages modifiées.
 
+## Mémoire partagée : `NOTES.md`
+
+@NOTES.md
+
+`NOTES.md` est la mémoire commune aux sessions locales et cloud. À chaque demande :
+- mettre à jour « État actuel » ou « Exigences » si quelque chose change ;
+- ajouter une ligne en haut du « Journal » ;
+- tout cela dans le même commit que la modification.
+
+Ne rien y mettre de privé : le dépôt est public.
+
 ## Structure
 
 | Chemin | Rôle |
