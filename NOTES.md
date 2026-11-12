@@ -6,8 +6,10 @@ commit que la modification qui va avec.
 
 ## État actuel
 
-- Les 6 propositions sont en ligne. On attend que le patron en choisisse une.
-  - 1 Arcades, 2 Lin & caramel, 3 Nuit gourmande, 4 Arcades de nuit, 5 Comptoir, 6 Étiquettes.
+- Les 5 propositions sont en ligne. On attend que le patron en choisisse une.
+  - 1 Arcades, 2 Lin & caramel, 3 Nuit gourmande, 4 Arcades de nuit, 5 Comptoir.
+  - La 6 (« Actuel » dans le sélecteur) reproduit le site actuel, pour comparer page par page. Elle doit rester fidèle à rameau-olivier.fr.
+  - L'ancienne 6 « Étiquettes » est retirée (récupérable dans l'historique git, commit 2e834f1).
 - La suite attend aussi :
   - l'archive du site WordPress (Duplicator, ou FTP + dump SQL) ;
   - la vérification que l'offre Ikoula permet un sous-domaine et une deuxième base de données, pour la préproduction.
@@ -41,6 +43,7 @@ commit que la modification qui va avec.
 
 Une ligne par demande, la plus récente en haut : `AAAA-MM-JJ — demande → ce qui a été fait / décidé`.
 
+- 2026-11-12 — Remplacer la maquette 6 par le site actuel → proposition 6 = reproduction de rameau-olivier.fr (mêmes pages, textes, couleurs, polices Forum/Merriweather/Open Sans/Sora, menu déroulant, tiroir). « Étiquettes » retirée. Sélecteur déplacé dans `switch.css`.
 - 2026-11-12 — Synchroniser la mémoire entre le local et le cloud → ce fichier, chargé par `CLAUDE.md`. En local, faire `git pull` en début de session.
 - 2026-11-06 — (session cloud) Proposition 6 « Étiquettes » : vert olive, store banne, étiquettes, polices Bricolage Grotesque + Instrument Serif, héros en tirages photo avec tampon tournant et bandeau défilant des rayons.
 - 2026-11-06 — Piloter les maquettes depuis le téléphone → générateur et `CLAUDE.md` ajoutés au dépôt, push direct sur `main`.

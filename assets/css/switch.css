@@ -1,0 +1,23 @@
+/* Sélecteur de maquette (pastille en bas à gauche), commun à toutes les propositions */
+.maquette-switch {
+  position: fixed; left: 16px; bottom: 16px; z-index: 90;
+  display: flex; align-items: center; gap: .5rem;
+  padding: .35rem .4rem .35rem .9rem; border-radius: 999px;
+  background: rgba(20, 14, 11, .88); color: #fff; font: 500 12px/1 system-ui, sans-serif;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .3); backdrop-filter: blur(8px);
+}
+.maquette-switch a { color: #fff; text-decoration: none; }
+.ms-home { opacity: .75; margin-right: .25rem; }
+.ms-home:hover { opacity: 1; }
+.ms-links { display: flex; gap: 2px; }
+.ms-links a { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; }
+.ms-links a:hover { background: rgba(255, 255, 255, .15); }
+.ms-links a.ms-actuel { width: auto; padding: 0 .65rem; border-radius: 999px; }
+.ms-links a[aria-current] { background: #fff; color: #1b1310; }
+.ms-close { width: 24px; height: 24px; border: 0; border-radius: 50%; background: transparent; color: #fff; opacity: .6; font-size: 16px; line-height: 1; }
+.ms-close:hover { opacity: 1; }
+.maquette-switch.hidden { display: none; }
+
+@media (max-width: 640px) {
+  .maquette-switch { left: 50%; transform: translateX(-50%); bottom: 12px; }
+}

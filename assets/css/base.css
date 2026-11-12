@@ -432,25 +432,6 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1
 .footer-addr { margin-top: 1.25rem; }
 .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding-block: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .12); font-size: .8rem; }
 
-/* sélecteur de maquette */
-.maquette-switch {
-  position: fixed; left: 16px; bottom: 16px; z-index: 90;
-  display: flex; align-items: center; gap: .5rem;
-  padding: .35rem .4rem .35rem .9rem; border-radius: 999px;
-  background: rgba(20, 14, 11, .88); color: #fff; font: 500 12px/1 system-ui, sans-serif;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .3); backdrop-filter: blur(8px);
-}
-.maquette-switch a { color: #fff; text-decoration: none; }
-.ms-home { opacity: .75; margin-right: .25rem; }
-.ms-home:hover { opacity: 1; }
-.ms-links { display: flex; gap: 2px; }
-.ms-links a { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; }
-.ms-links a:hover { background: rgba(255, 255, 255, .15); }
-.ms-links a[aria-current] { background: #fff; color: #1b1310; }
-.ms-close { width: 24px; height: 24px; border: 0; border-radius: 50%; background: transparent; color: #fff; opacity: .6; font-size: 16px; line-height: 1; }
-.ms-close:hover { opacity: 1; }
-.maquette-switch.hidden { display: none; }
-
 /* apparition au défilement */
 .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
 .js .reveal.in { opacity: 1; transform: none; }
@@ -547,7 +528,6 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1
   .footer-grid { grid-template-columns: 1fr; }
   .stats { gap: 1.5rem; }
   .stats strong { font-size: 1.6rem; }
-  .maquette-switch { left: 50%; transform: translateX(-50%); bottom: 12px; }
 }
 @media (max-width: 359px) {
   .products { grid-template-columns: 1fr; }

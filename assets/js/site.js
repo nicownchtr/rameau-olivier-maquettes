@@ -52,6 +52,23 @@
         burger.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
       });
     }
+    /* tiroir du site actuel (proposition 6) : bouton × et fond assombri */
+    document.querySelectorAll("[data-nav-close]").forEach(function (el) {
+      el.addEventListener("click", function () {
+        document.body.classList.remove("nav-open");
+        if (burger) { burger.setAttribute("aria-expanded", "false"); burger.setAttribute("aria-label", "Ouvrir le menu"); }
+      });
+    });
+    /* témoignages qui défilent (site actuel) */
+    document.querySelectorAll("[data-carousel]").forEach(function (box) {
+      var slides = box.children, i = 0;
+      if (slides.length < 2) return;
+      setInterval(function () {
+        slides[i].classList.remove("on");
+        i = (i + 1) % slides.length;
+        slides[i].classList.add("on");
+      }, 6000);
+    });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
         document.body.classList.remove("nav-open");

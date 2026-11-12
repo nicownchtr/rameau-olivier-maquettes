@@ -54,12 +54,11 @@ PROPOSITIONS = [
         "polices": "Fraunces (titres) · Figtree (texte)",
     },
     {
-        "id": 6, "nom": "Étiquettes", "css": "p6.css", "hero": "etiquettes", "nouveau": True,
-        "pitch": "Le parti pris le plus audacieux : le vert du rameau d'olivier, un en-tête en store banne, "
-                 "des rayons en étiquettes colorées, un bandeau qui défile et un tampon « depuis 1972 ». "
-                 "L'esprit d'une épicerie de quartier, en version graphique et contemporaine.",
-        "palette": ["#232a17", "#3f4c26", "#c4552f", "#e6a93a", "#f4eddc"],
-        "polices": "Bricolage Grotesque (titres et texte) · Instrument Serif (italiques)",
+        "id": 6, "nom": "Site actuel", "css": "p6.css", "actuel": True,
+        "pitch": "Le site tel qu'il est aujourd'hui, reproduit à l'identique ou presque (mêmes pages, textes, "
+                 "couleurs et polices) pour comparer chaque proposition avec l'existant, page par page.",
+        "palette": ["#2e1a13", "#a78957", "#ffffff", "#000000"],
+        "polices": "Forum (titres) · Merriweather · Open Sans (texte) · Sora (menu)",
     },
 ]
 
@@ -284,7 +283,8 @@ def pied():
 def selecteur(prop, fichier):
     liens = "".join(
         f'<a href="../proposition-{p["id"]}/{fichier}"{" aria-current=true" if p["id"] == prop["id"] else ""} '
-        f'title="{e(p["nom"])}">{p["id"]}</a>' for p in PROPOSITIONS)
+        f'title="{e(p["nom"])}"{' class="ms-actuel"' if p.get("actuel") else ""}>{"Actuel" if p.get("actuel") else p["id"]}</a>'
+        for p in PROPOSITIONS)
     return f"""
 <aside class="maquette-switch" data-switch aria-label="Changer de proposition">
   <a class="ms-home" href="../index.html" title="Toutes les propositions">Maquettes</a>
@@ -295,6 +295,7 @@ def selecteur(prop, fichier):
 
 
 def page(prop, fichier, titre, corps, desc=""):
+    actuel = prop.get("actuel")
     return f"""<!doctype html>
 <html lang="fr">
 <head>
@@ -305,17 +306,18 @@ def page(prop, fichier, titre, corps, desc=""):
 <meta name="description" content="{e(desc or "Le Rameau d'Olivier, épicerie fine à Saint-Germain-en-Laye depuis 1972.")}">
 <link rel="icon" href="{IMG}cropped-FAVICON-192x192.png">
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
-<link rel="stylesheet" href="../assets/css/base.css">
+{"" if actuel else '<link rel="stylesheet" href="../assets/css/base.css">'}
 <link rel="stylesheet" href="../assets/css/{prop["css"]}">
+<link rel="stylesheet" href="../assets/css/switch.css">
 <script type="speculationrules">{{"prerender":[{{"where":{{"href_matches":"*.html"}},"eagerness":"moderate"}}]}}</script>
 <script src="../assets/js/site.js" defer></script>
 </head>
 <body class="p{prop["id"]}">
-{entete(fichier)}
+{a_entete(fichier) if actuel else entete(fichier)}
 <main id="contenu">
 {corps}
 </main>
-{pied()}
+{a_pied() if actuel else pied()}
 {selecteur(prop, fichier)}
 </body>
 </html>
@@ -447,32 +449,6 @@ def hero(prop):
       </div>
     </div>
   </div>
-</section>"""
-    if prop["hero"] == "etiquettes":
-        rayons = "".join(f"<span>{e(c[2])}</span><i>✦</i>" for c in CATEGORIES)
-        return f"""
-<section class="hero hero-etiq">
-  <div class="container he-grid">
-    <div class="he-text">
-      <p class="eyebrow">Épicerie fine · Saint-Germain-en-Laye</p>
-      <h1>Le temple <em>des saveurs</em></h1>
-      <p class="lead">{intro}</p>
-      {btns}
-      {stats}
-    </div>
-    <div class="he-board">
-      <svg class="he-branch" viewBox="0 0 240 120" aria-hidden="true"><path d="M8 100C60 92 120 70 232 14"/><g><ellipse cx="52" cy="84" rx="16" ry="6" transform="rotate(-40 52 84)"/><ellipse cx="66" cy="102" rx="16" ry="6" transform="rotate(20 66 102)"/><ellipse cx="104" cy="64" rx="17" ry="6.5" transform="rotate(-45 104 64)"/><ellipse cx="122" cy="84" rx="17" ry="6.5" transform="rotate(10 122 84)"/><ellipse cx="156" cy="42" rx="17" ry="6.5" transform="rotate(-50 156 42)"/><ellipse cx="176" cy="58" rx="16" ry="6" transform="rotate(0 176 58)"/><ellipse cx="208" cy="22" rx="14" ry="5.5" transform="rotate(-30 208 22)"/></g><circle class="olive" cx="140" cy="76" r="6"/><circle class="olive" cx="190" cy="44" r="5.5"/></svg>
-      <figure class="he-card he-c1">{img("FRANK-EPICIER-768x1024.jpg", "Frank conseille une cliente devant les huiles d'olive", loading="eager")}<figcaption>Le conseil, avant tout</figcaption></figure>
-      <figure class="he-card he-c2">{img("MARCO-POLO-VERT-V2.jpg", "Thé Marco Polo Mariage Frères", loading="eager")}<figcaption>Marco Polo, Mariage Frères</figcaption></figure>
-      <figure class="he-card he-c3">{img("GAMME-CONFITURES.jpg", "Confitures artisanales", loading="eager")}<figcaption>Confitures maison</figcaption></figure>
-      <span class="he-tag"><strong>N°12</strong>rue de Pologne</span>
-      <span class="he-stamp" aria-hidden="true">
-        <svg viewBox="0 0 200 200"><defs><path id="tampon" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs><text><textPath href="#tampon" textLength="458" lengthAdjust="spacing">Épicerie fine · Saint-Germain-en-Laye ·</textPath></text></svg>
-        <span><small>depuis</small>1972</span>
-      </span>
-    </div>
-  </div>
-  <div class="ticker" aria-hidden="true"><div class="ticker-track"><div>{rayons}</div><div>{rayons}</div></div></div>
 </section>"""
     return f"""
 <section class="hero hero-nuit">
@@ -784,6 +760,287 @@ def p_contact(prop):
     return "Contact · Le Rameau d'Olivier", corps
 
 
+# ---------------------------------------------------------------- proposition 6 : le site actuel
+# Reproduction du site en ligne (thème Innov + Elementor) pour comparer avec les propositions.
+# Mêmes noms de fichiers que les autres propositions, pour que le sélecteur fonctionne page à page.
+MENU_ACTUEL = {  # libellés du menu déroulant « Nos produits » du site actuel
+    "thes.html": "Thés Mariage Frères",
+    "cafes.html": "Cafés d’exception",
+    "huiles-olive.html": "Nos huiles d’olive AOP",
+    "vinaigres.html": "Vinaigres balsamiques & artisanaux",
+    "epices.html": "Sels, poivres & epices",
+    "condiments.html": "Sauces & condiments",
+    "apero.html": "L’heure de l’apero",
+    "truffe-foie-gras.html": "Specialites a la truffe & foie gras",
+    "douceurs.html": "Douceurs sucrees",
+}
+
+COFFRETS_ACTUEL = [  # légendes telles qu'elles sont écrites sur le site actuel
+    ("Coffret dégustation 3 Velours de l'Abbaye 50 ml - 24,50 €", "COFFRET-3-VELOURS-DE-LABBAYE.jpg"),
+    ("Coffret 3 tartinables du Domaine Terra - 29,70 €", "COFFRET-3-TARTINABLES-DOMAINE-TERRA.jpg"),
+    ('Sélection "Autour de l\'apéro" à partir de 34 €', "SELECTION-AUTOUR-DE-LAPERO-V2-1024x932.jpg"),
+    ("Coffret 3 Balsamiques de Modène médaillés - 49,50 €", "COFFRET-3-MEDAILLES-GIUSEPPE-GIUSTI-1024x1024.webp"),
+    ('Une sélection "Fraîche et Fruitée" à partir de 57,30 €', "SELECTION-FRUITEE-V2-1024x923.jpg"),
+    ('Une sélection "Pause Goûter" à partir de 75 €', "SELECTION-PAUSE-GOUTER-1-e1757607936353.jpg"),
+    ('Une sélection "Escapade Gourmande" à partir de 119 €', "SELECTION-ESCAPADE-GOURMANDE-1024x777.jpg"),
+]
+
+NOUVEAUTES_ACTUEL = [  # mêmes visuels que NOUVEAUTES, titres du site actuel
+    ("Calendrier Mariage Frères", "MARIAGE-FRERES.jpg"),
+    ("Calendrier Oliviers & Co", "OLIVIERS-CO-CALENDAR.jpg"),
+    ("Calendrier Le Roy René", "CALENDRIER-AVENT-2026.jpg"),
+    ("Calendrier Terre Exotique", "CALENDRIER-TERRE-EXOTIQUE-V3.png"),
+    ("Moutardes de Versailles", "MOUTARDE-DE-VERSAILLES.jpg"),
+    ("Calendrier Sophie M", "CALENDRIER-AVENT-TASTY-V2.jpg"),
+    ("Les bouillons Oumami", "LE-BOUILLON-PHO-EPICURE-2025-1.jpg"),
+    ("Foie Gras Barthouil", "FOIE-GRAS-DE-CANARD-ENTIER.jpg"),
+]
+
+HORAIRES_ACTUEL = [
+    ("Mardi", "9h30-13h15 & 14h30-19h00"), ("Mercredi", "9h30-13h00 & 14h30-19h00"),
+    ("Jeudi", "9h30-13h00 & 14h30-19h00"), ("Vendredi", "9h30-13h15 & 14h30-19h00"),
+    ("Samedi", "9h30-13h15 & 14h30-19h00"), ("Dimanche", "10h00-13h00"), ("Lundi", "fermé"),
+]
+
+ICONES_PLEINES = {  # icônes Font Awesome pleines, comme sur le site actuel
+    "fb": '<svg viewBox="0 0 512 512" aria-hidden="true"><path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256c0 120 82.7 220.8 194.2 248.5V334.2h-52.8V256h52.8v-33.7c0-87.1 39.4-127.5 125-127.5 16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256z"/></svg>',
+    "ig": '<svg viewBox="0 0 448 512" aria-hidden="true"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>',
+}
+
+
+def a_entete(actif):
+    def lien(href, label):
+        cur = ' aria-current="page"' if actif == href else ""
+        return f'<a href="{href}"{cur}>{label}</a>'
+
+    produits_actif = actif == "produits.html" or actif in MENU_ACTUEL
+    sous = "".join(f'<li>{lien(f, e(n))}</li>' for f, n in MENU_ACTUEL.items())
+    autres = (f'<li>{lien("inspiration-deco.html", "Inspiration deco")}</li>'
+              f'<li>{lien("cadeaux.html", "Cadeaux d’entreprise")}</li>'
+              f'<li>{lien("notre-histoire.html", "Notre histoire")}</li>'
+              f'<li>{lien("contact.html", "Nous contacter")}</li>')
+    chev = '<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'
+    return f"""
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="ra-header">
+  <button class="burger" type="button" aria-controls="tiroir" aria-expanded="false" aria-label="Ouvrir le menu"><span></span><span></span></button>
+  <a class="ra-brand" href="index.html" aria-label="Le Rameau d'Olivier, accueil"><span class="logo"></span></a>
+  <nav class="ra-nav" aria-label="Menu principal">
+    <ul>
+      <li>{lien("index.html", "Accueil")}</li>
+      <li class="has-sub"><a href="produits.html"{' aria-current="page"' if produits_actif else ""}>Nos produits {chev}</a><ul>{sous}</ul></li>
+      {autres}
+    </ul>
+  </nav>
+</header>
+<div class="ra-backdrop" data-nav-close></div>
+<aside class="ra-drawer" id="tiroir" aria-label="Menu">
+  <button class="ra-close" type="button" aria-label="Fermer le menu" data-nav-close>×</button>
+  <div class="ra-drawer-info">
+    <span class="logo"></span>
+    <p>12, Rue De Pologne<br>78100 Saint-Germain-En-Laye</p>
+    <p>Contact@Rameau-Olivier.Fr<br>01 34 51 56 35</p>
+  </div>
+  <ul class="ra-drawer-nav">
+    <li>{lien("index.html", "Accueil")}</li>
+    <li><details{" open" if produits_actif else ""}><summary>Nos produits {chev}</summary><ul>{sous}</ul></details></li>
+    {autres}
+  </ul>
+</aside>
+"""
+
+
+def a_pied():
+    return f"""
+<footer class="ra-footer">
+  <div class="ra-wrap ra-footer-grid">
+    <div><span class="logo"></span></div>
+    <div>
+      <p class="ra-footer-addr">12 rue de Pologne<br>78100 Saint-Germain-en-Laye</p>
+      <p><a href="mailto:{MAIL}">{MAIL}</a><br><a href="tel:{TEL_LIEN}">{TEL}</a></p>
+    </div>
+    <div>
+      <p class="ra-footer-title">Liens utiles</p>
+      <ul>
+        <li><a href="contact.html">Nous contacter</a></li>
+        <li><a href="cadeaux.html">Cadeaux d'entreprise</a></li>
+        <li><a href="notre-histoire.html">Notre histoire</a></li>
+        <li><a href="#">Mentions légales &amp; politique de confidentialité</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ra-wrap ra-footer-bottom">
+    <span class="ra-socials"><a href="{FB}" aria-label="Facebook">{ICONES_PLEINES["fb"]}</a><a href="{IG}" aria-label="Instagram">{ICONES_PLEINES["ig"]}</a></span>
+    <span>© 2025 Le Rameau d'Olivier - Thème WP Innovcode</span>
+  </div>
+</footer>
+"""
+
+
+def a_titre(texte):
+    return f'<h1 class="ra-h1">{e(texte)}</h1>'
+
+
+def a_produit(p):
+    image = p["image"].split("/")[-1]
+    return f"""<article class="ra-product">
+  <div class="ra-product-media{cadrage(image)}">{img(image, p["titre"])}</div>
+  <h3>{e(p["titre"])}</h3>
+  {paras(p["texte"])}
+</article>"""
+
+
+def a_page_produits(titre, slug):
+    intro, outro = textes_categorie(slug)
+    cartes = "".join(a_produit(p) for p in C[slug]["produits"])
+    return f"""
+{a_titre(titre)}
+<section class="ra-wrap">
+  <div class="ra-box ra-box-bold">{paras(intro)}</div>
+  <div class="ra-panel"><div class="ra-products">{cartes}</div></div>
+  {f'<div class="ra-box ra-box-bold">{paras(outro)}</div>' if outro else ""}
+</section>
+"""
+
+
+def a_accueil():
+    t = C["home"]["textes"]
+    nouv = "".join(f"""<article class="ra-card"><div class="ra-card-in">
+      <div class="ra-card-media">{img(im, n)}</div><h3>{e(n)}</h3></div></article>"""
+                   for n, im in NOUVEAUTES_ACTUEL)
+    eng = "".join(f"<li>{e(x)}</li>" for x in t[3:7])
+    tem = "".join(f"""<figure class="ra-quote{' on' if i == 0 else ''}"><span class="ra-quote-mark" aria-hidden="true">”</span>
+      <blockquote>{e(q)}</blockquote><figcaption>{e(a)}{f" - {e(s)}" if s else ""}</figcaption></figure>"""
+                  for i, (q, a, s) in enumerate(TEMOIGNAGES))
+    offrir = t[9].split("\n")
+    corps = f"""
+<section class="ra-wrap ra-home-logo"><span class="logo"></span></section>
+<section class="ra-wrap">
+  <h2 class="ra-band ra-band-spaced">{e(t[0])}</h2>
+  <div class="ra-cols ra-intro">
+    <div class="ra-intro-text">{paras(t[1])}</div>
+    <div class="ra-intro-media">{img("FRANK-EPICIER-768x1024.jpg", "Frank conseille une cliente", loading="eager")}</div>
+  </div>
+  <h2 class="ra-band ra-band-thin">{e(t[2])}</h2>
+  <ul class="ra-list">{eng}</ul>
+</section>
+<section class="ra-wrap ra-nouveautes">
+  <h2 class="ra-h2 ra-center">{e(t[7])}</h2>
+  <div class="ra-cards">{nouv}</div>
+</section>
+<section class="ra-testimonials" style="background-image:url({IMG}LA-PLANTATION-V2.jpg)">
+  <div class="ra-wrap"><div class="ra-quote-box" data-carousel>{tem}</div></div>
+</section>
+<section class="ra-wrap ra-cols ra-offrir">
+  <div>
+    <h2 class="ra-h2">{e(t[8])}</h2>
+    <p>{e(offrir[0])}</p>
+    <p>{e(offrir[1]).replace("cadeaux d’entreprise", '<a href="cadeaux.html">cadeaux d’entreprise</a>')}</p>
+    <a class="ra-btn" href="contact.html">Contactez-nous</a>
+  </div>
+  <div>{img("COVER-SELECTION-NOEL-2025-sans-adresse.jpg", "Sélection de Noël")}</div>
+</section>
+"""
+    return "Le Rameau d'Olivier | Épicerie fine à Saint-Germain-en-Laye", corps
+
+
+def a_categorie(cat):
+    f, slug = cat[0], cat[1]
+    return f"{MENU_ACTUEL[f]} | Le Rameau d'Olivier", a_page_produits(MENU_ACTUEL[f], slug)
+
+
+def a_deco():
+    return "Inspiration deco | Le Rameau d'Olivier", a_page_produits("Inspiration deco", "inspiration-deco")
+
+
+def a_produits():
+    liens = "".join(f'<li><a href="{f}">{e(n)}</a></li>' for f, n in MENU_ACTUEL.items())
+    corps = f"""
+{a_titre("Nos produits")}
+<section class="ra-wrap">
+  <div class="ra-box ra-box-bold"><p>Cette page n'existe pas sur le site actuel : « Nos produits » ouvre seulement
+  une liste déroulante, sans page qui présente l'ensemble des rayons. Elle n'est là que pour garder le sélecteur
+  de maquettes cohérent d'une proposition à l'autre.</p></div>
+  <ul class="ra-plain-list">{liens}</ul>
+</section>
+"""
+    return "Nos produits | Le Rameau d'Olivier", corps
+
+
+def a_cadeaux():
+    t = C["cadeaux-dentreprise"]["textes"]
+    cartes = "".join(f'<figure class="ra-gift">{img(im, n)}<figcaption>{e(n)}</figcaption></figure>'
+                     for n, im in COFFRETS_ACTUEL)
+    corps = f"""
+{a_titre("Cadeaux d’entreprise")}
+<section class="ra-wrap">
+  <div class="ra-box ra-box-bold">{paras(t[0])}</div>
+  <div class="ra-gifts">{cartes}</div>
+  <div class="ra-box ra-box-bold">{paras(t[1])}</div>
+  <h2 class="ra-h2 ra-center">{e(t[2])}</h2>
+  <div class="ra-embed">
+    <div class="ra-embed-bar" aria-hidden="true"><span>1</span> sur 8</div>
+    <div class="ra-embed-page">{img("COVER-SELECTION-NOEL-2025-sans-adresse.jpg", "Sélection Noël 2025, première page")}</div>
+    <p>Powered By EmbedPress</p>
+  </div>
+</section>
+"""
+    return "Cadeaux d’entreprise | Le Rameau d'Olivier", corps
+
+
+def a_histoire():
+    t = C["notre-histoire"]["textes"]
+    boites = "".join(f"<p>{e(x)}</p>" for x in t[4:7])
+    corps = f"""
+{a_titre("Notre histoire")}
+<section class="ra-wrap ra-cols ra-histoire">
+  <div>
+    <h2 class="ra-h2 ra-spaced">{e(t[0])}</h2>
+    {paras(t[1])}
+    {paras(t[2])}
+    <a class="ra-btn ra-btn-ig" href="{IG}" target="_blank" rel="noopener">{ICONES_PLEINES["ig"]} Suivez notre actualité !</a>
+  </div>
+  <div>{img("FRANK-NOTRE-HISTOIRE-V2-768x1024.jpg", "Frank dans la boutique", loading="eager")}</div>
+</section>
+<h2 class="ra-h2 ra-center ra-wrap">{e(t[3])}</h2>
+<section class="ra-oliviers" style="background-image:url({IMG}OLIVIERS-SANARY-4.jpg)">
+  <div class="ra-wrap ra-oliviers-grid">{boites}</div>
+</section>
+"""
+    return "Notre histoire | Le Rameau d'Olivier", corps
+
+
+def a_contact():
+    t = C["nous-contacter"]["textes"]
+    heures = "".join(f"<li>{j}&nbsp; : {e(h)}</li>" for j, h in HORAIRES_ACTUEL)
+    adresse = "".join(f"<p>{e(x)}</p>" for x in t[2].split("\n"))
+    corps = f"""
+{a_titre("Nous contacter")}
+<section class="ra-wrap ra-cols ra-contact">
+  <div>
+    <h2 class="ra-h2 ra-spaced ra-small">{e(t[0])}</h2>
+    <form class="ra-form" data-form>
+      <label>Nom *<input type="text" name="nom" placeholder="Obligatoire" required></label>
+      <label>Email *<input type="email" name="email" placeholder="Obligatoire" required></label>
+      <label>Votre message *<textarea name="message" rows="7" required></textarea></label>
+      <button type="submit">Envoyer</button>
+      <p class="form-ok" hidden>Maquette : le message n'est pas réellement envoyé.</p>
+    </form>
+  </div>
+  <div>{img("FRANK-DEVANT-BOUTIQUE.jpg", "Frank devant la boutique", loading="eager")}</div>
+</section>
+<section class="ra-wrap">
+  <div class="ra-map"><div><p>Cliquez sur « J’accepte » pour activer<br>Google maps<br>Politique de cookies</p><span>J’accepte</span></div></div>
+  <p class="ra-big-socials"><a href="{IG}" aria-label="Instagram">{ICONES_PLEINES["ig"]}</a><a href="{FB}" aria-label="Facebook">{ICONES_PLEINES["fb"]}</a></p>
+  <div class="ra-cols ra-coord">
+    <div><h2 class="ra-h2">{e(t[1])}</h2>{adresse}</div>
+    <ul>{heures}</ul>
+  </div>
+</section>
+"""
+    return "Nous contacter | Le Rameau d'Olivier", corps
+
+
 # ---------------------------------------------------------------- page de choix
 def index_maquettes():
     cartes = ""
@@ -793,7 +1050,7 @@ def index_maquettes():
 <a class="choice" href="proposition-{p["id"]}/index.html">
   <span class="shot"><img src="assets/apercus/proposition-{p["id"]}.jpg" alt="Aperçu de la proposition {p["id"]}" onerror="this.remove()"></span>
   <span class="choice-body">
-    <small>Proposition {p["id"]}{' <b class="new">Nouveau</b>' if p.get("nouveau") else ""}</small>
+    <small>{"Pour comparer" if p.get("actuel") else f"Proposition {p['id']}"}{' <b class="new">Nouveau</b>' if p.get("nouveau") else ""}</small>
     <strong>{e(p["nom"])}</strong>
     <span class="pitch">{e(p["pitch"])}</span>
     <span class="swatches">{pastilles}</span>
@@ -809,7 +1066,7 @@ def index_maquettes():
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/css/choix.css">
 </head><body>
-<header><span class="logo"></span><p>Refonte graphique : six propositions</p></header>
+<header><span class="logo"></span><p>Refonte graphique : cinq propositions et le site actuel</p></header>
 <main>
   <div class="choices">{cartes}</div>
   <section class="notes">
@@ -839,6 +1096,21 @@ def main():
     n = 0
     for prop in PROPOSITIONS:
         dossier = os.path.join(SORTIE, f"proposition-{prop['id']}")
+        if prop.get("actuel"):
+            pages = {
+                "index.html": a_accueil(),
+                "produits.html": a_produits(),
+                "inspiration-deco.html": a_deco(),
+                "cadeaux.html": a_cadeaux(),
+                "notre-histoire.html": a_histoire(),
+                "contact.html": a_contact(),
+            }
+            for cat in CATEGORIES:
+                pages[cat[0]] = a_categorie(cat)
+            for fichier, (titre, corps) in pages.items():
+                ecrire(os.path.join(dossier, fichier), page(prop, fichier, titre, corps))
+                n += 1
+            continue
         pages = {
             "index.html": p_accueil(prop),
             "produits.html": p_produits(prop),

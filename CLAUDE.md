@@ -28,7 +28,9 @@ Ne rien y mettre de privé : le dépôt est public.
 | `outils/dimensions.json` | Dimensions des images (cadrage des images très verticales). |
 | `outils/verifier.py` | Vérifie qu'aucun lien ni ressource locale n'est cassé. |
 | `assets/css/base.css` | Mise en page commune à toutes les propositions (y compris responsive). |
-| `assets/css/p1.css` … `p6.css` | Thème de chaque proposition (couleurs, polices, variantes). `p4.css` importe `p1.css`. |
+| `assets/css/p1.css` … `p5.css` | Thème de chaque proposition (couleurs, polices, variantes). `p4.css` importe `p1.css`. |
+| `assets/css/p6.css` | **Site actuel** reproduit pour comparaison (fonctions `a_*` de `generer.py`). Feuille autonome : `base.css` n'est pas chargée. |
+| `assets/css/switch.css` | Sélecteur de proposition (pastille en bas), commun aux 6. |
 | `assets/css/choix.css` | Page d'accueil des maquettes (choix de la proposition). |
 | `assets/js/site.js` | Interactions : horaires du jour, menu mobile, en-tête collant, carrousel, « Lire la suite », sélecteur de proposition. |
 | `assets/img/`, `assets/fonts/` | Images du site actuel et polices locales. |
@@ -69,4 +71,5 @@ Ne rien y mettre de privé : le dépôt est public.
 - En-tête collant :
   - il ne doit jamais changer de hauteur dans le flux de la page, sinon le contenu saute au défilement ;
   - utiliser `--header-shrink` (top négatif) et des `transform`.
-- Les 6 propositions partagent `base.css` : après un changement commun, jeter un œil aux 6.
+- Les propositions 1 à 5 partagent `base.css` : après un changement commun, jeter un œil aux 5.
+- La proposition 6 reproduit le site actuel : ne pas l'« améliorer », elle doit rester fidèle à rameau-olivier.fr.
