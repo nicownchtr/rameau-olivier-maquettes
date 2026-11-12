@@ -41,7 +41,7 @@ commit que la modification qui va avec.
 
 Une ligne par demande, la plus récente en haut : `AAAA-MM-JJ — demande → ce qui a été fait / décidé`.
 
-- 2026-11-12 — Synchroniser la mémoire entre le local et le cloud → ce fichier, chargé par `CLAUDE.md`. En local, `git pull` automatique au démarrage de chaque session.
+- 2026-11-12 — Synchroniser la mémoire entre le local et le cloud → ce fichier, chargé par `CLAUDE.md`. En local, faire `git pull` en début de session.
 - 2026-11-06 — (session cloud) Proposition 6 « Étiquettes » : vert olive, store banne, étiquettes, polices Bricolage Grotesque + Instrument Serif, héros en tirages photo avec tampon tournant et bandeau défilant des rayons.
 - 2026-11-06 — Piloter les maquettes depuis le téléphone → générateur et `CLAUDE.md` ajoutés au dépôt, push direct sur `main`.
 - 2026-11-06 — L'en-tête collant donnait un à-coup au premier cran de défilement → il garde sa hauteur dans la page (`--header-shrink`).
