@@ -13,7 +13,10 @@ commit que la modification qui va avec.
 - La suite attend aussi :
   - l'archive du site WordPress (Duplicator, ou FTP + dump SQL) ;
   - la vérification que l'offre Ikoula permet un sous-domaine et une deuxième base de données, pour la préproduction.
-- Le thème WordPress n'est pas commencé : on le lance sur la base de la 3 (question préalable sur les modèles créés depuis l'interface, voir Journal).
+- **Thème WordPress commencé** (2026-11-16), dans le dossier local `wordpress/` à côté de `maquettes/` (dépôt git local, pas encore sur GitHub).
+  - WordPress 7.1 dans Docker, contenu importé depuis `outils/contenu.json` (9 rayons, 100 produits, pages, menu, horaires).
+  - Fait : extension `rameau-fonctions`, thème `rameau`, en-tête, grand menu, menu mobile, pied de page, accueil, « Nos produits », pages de rayon. Rendu vérifié en 1440 et 390 px, 0 bloc invalide.
+  - À faire : pages Inspiration déco, Cadeaux d'entreprise, Notre histoire, Contact (avec une extension de formulaire), puis brancher l'archive du site actuel.
 
 ## Exigences du propriétaire
 
@@ -34,17 +37,24 @@ commit que la modification qui va avec.
   - Couleurs et polices dans `theme.json`.
   - Des compositions prêtes à l'emploi, pour que l'administrateur modifie la mise en page lui-même. Il connaît Elementor et n'a ni Docker ni git.
 - **Produits :** type de contenu « Produits » avec une taxonomie « Rayons » (nom, photo, description, mention, case « Nouveauté »).
+  - Rayons hiérarchiques : les familles (« Thés & cafés »…) sont les rayons parents. Chaque rayon a une photo, une accroche, un encadré et un ordre.
+  - « Nouveauté » est une **sélection** (taxonomie à cases) : cocher la case dans un produit l'ajoute au carrousel de l'accueil.
   - Import automatique des produits existants depuis `outils/contenu.json`.
 - **Horaires et coordonnées :** une page de réglages unique. Elle alimente le bandeau du haut, le pied de page, la page contact et la pastille « ouvert aujourd'hui ».
 - **Modifications par Claude :** compte WordPress dédié aux droits limités, avec mot de passe d'application, via l'API REST ou un adaptateur MCP.
   - Les brouillons de pages publiées passent par *Yoast Duplicate Post* (« Réécrire et republier ») : l'administrateur prévisualise puis republie.
 - **Préproduction** protégée par mot de passe pour les changements de design global.
 - **Code du thème sur GitHub**, déploiement du thème seul vers Ikoula. Le contenu se modifie directement en production.
+- **Personnalisation sans code** : tout ce qui est assemblage de blocs se crée dans l'interface (compositions, modèles de page, en-tête, pied de page, styles). WordPress 7.1 permet aussi de masquer un bloc, sur tous les écrans ou seulement sur mobile, tablette ou ordinateur.
+  - Grand menu : bloc maison placé dans le menu ; le contenu du panneau est une partie de modèle modifiable, et les colonnes de rayons se remplissent seules.
+  - Carrousel : pas de bloc dans le cœur. C'est une variante « Carrousel » des blocs Groupe et Liste de publications ; les flèches sont ajoutées automatiquement.
+- **Secure Custom Fields** (nouveaux types de contenu et champs créés par l'administrateur) : prévu en V2.
 
 ## Journal
 
 Une ligne par demande, la plus récente en haut : `AAAA-MM-JJ — demande → ce qui a été fait / décidé`.
 
+- 2026-11-16 — Carrousel et grand menu modifiables depuis l'interface ? SCF en V2, OK pour construire le thème sans l'archive → réponse : le cœur n'a ni carrousel ni sous-menu illustré ; on les fournit (variante « Carrousel », bloc « Grand menu » dont le panneau est une partie de modèle). Tout bloc se masque nativement. Thème et extension démarrés dans `wordpress/` (WordPress 7.1 Docker, import de contenu.json) : accueil, Nos produits, rayons, en-tête, menus, pied de page.
 - 2026-11-16 — Supprimer la 6, attaquer le thème sur la base de la 3 ; peut-on créer des modèles d'éléments depuis l'interface ? → 6 supprimée (avec sélecteur, page de choix, polices). Réponse : oui pour tout ce qui est assemblage de blocs (compositions, modèles de page, en-tête/pied, styles globaux) ; du code seulement pour un nouveau comportement ou une nouvelle structure de données.
 - 2026-11-16 — Le patron choisit la 3 ; logo à la place du titre de l'accueil, texte qui ne cache plus le patron, suppression des autres maquettes → logo + sous-titre « Le temple des saveurs », photo du héros à droite (au-dessus sur mobile), propositions 1, 2, 4, 5 retirées avec leurs CSS, polices et aperçus. La 6 (site actuel) est gardée pour comparer.
 - 2026-11-12 — Remplacer la maquette 6 par le site actuel → proposition 6 = reproduction de rameau-olivier.fr (mêmes pages, textes, couleurs, polices Forum/Merriweather/Open Sans/Sora, menu déroulant, tiroir). « Étiquettes » retirée. Sélecteur déplacé dans `switch.css`.
