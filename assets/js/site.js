@@ -52,23 +52,6 @@
         burger.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
       });
     }
-    /* tiroir du site actuel (proposition 6) : bouton × et fond assombri */
-    document.querySelectorAll("[data-nav-close]").forEach(function (el) {
-      el.addEventListener("click", function () {
-        document.body.classList.remove("nav-open");
-        if (burger) { burger.setAttribute("aria-expanded", "false"); burger.setAttribute("aria-label", "Ouvrir le menu"); }
-      });
-    });
-    /* témoignages qui défilent (site actuel) */
-    document.querySelectorAll("[data-carousel]").forEach(function (box) {
-      var slides = box.children, i = 0;
-      if (slides.length < 2) return;
-      setInterval(function () {
-        slides[i].classList.remove("on");
-        i = (i + 1) % slides.length;
-        slides[i].classList.add("on");
-      }, 6000);
-    });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
         document.body.classList.remove("nav-open");
@@ -125,17 +108,6 @@
         e.preventDefault();
         form.querySelector(".form-ok").hidden = false;
       });
-    });
-
-    /* sélecteur de proposition : masquable, mémorisé pour la session */
-    var sw = document.querySelector("[data-switch]");
-    try {
-      if (sw && sessionStorage.getItem("ms-hidden") === "1") sw.classList.add("hidden");
-    } catch (err) { /* stockage indisponible : on ignore */ }
-    var close = document.querySelector("[data-switch-close]");
-    if (close) close.addEventListener("click", function () {
-      sw.classList.add("hidden");
-      try { sessionStorage.setItem("ms-hidden", "1"); } catch (err) { /* ignore */ }
     });
 
     /* apparition douce au défilement */
