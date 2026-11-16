@@ -1,7 +1,7 @@
 """Génère les propositions de maquettes (HTML statique) à partir de contenu.json.
 
 Usage (depuis la racine du dépôt) : python3 outils/generer.py
-Sortie : proposition-N/*.html et index.html à la racine du dépôt.
+Sortie : proposition-3/*.html (proposition retenue), proposition-6/*.html (site actuel) et index.html à la racine du dépôt.
 """
 import html
 import json
@@ -19,44 +19,16 @@ IMG = "../assets/img/"
 # ---------------------------------------------------------------- propositions
 PROPOSITIONS = [
     {
-        "id": 1, "nom": "Arcades", "css": "p1.css", "hero": "arches",
-        "pitch": "Les couleurs actuelles du site (or, brun, chocolat), modernisées. "
-                 "Les arches des vitrines de la boutique deviennent le motif graphique du site.",
-        "palette": ["#2e1a13", "#43312b", "#a78957", "#f6f1ea", "#ffffff"],
-        "polices": "Forum (titres, police actuelle) · Jost (texte)",
-    },
-    {
-        "id": 2, "nom": "Lin & caramel", "css": "p2.css", "hero": "edito",
-        "pitch": "Une version claire et lumineuse, esprit magazine : fond lin, caramel et cacao, "
-                 "grandes typographies élégantes et beaucoup d'air.",
-        "palette": ["#3a2a20", "#8f5f3a", "#c4a26a", "#efe7da", "#f7f2ea"],
-        "polices": "Cormorant Garamond (titres) · Manrope (texte)",
-    },
-    {
-        "id": 3, "nom": "Nuit gourmande", "css": "p3.css", "hero": "nuit",
-        "pitch": "Une ambiance sombre et chaleureuse, couleur espresso et or, "
+        "id": 3, "nom": "Nuit gourmande", "css": "p3.css",
+        "pitch": "La proposition retenue : une ambiance sombre et chaleureuse, couleur espresso et or, "
                  "qui met en valeur les produits comme dans un écrin.",
         "palette": ["#1b1310", "#2a1e18", "#c9a96e", "#e9dcc6", "#f4ede2"],
         "polices": "Playfair Display (titres) · DM Sans (texte)",
     },
     {
-        "id": 4, "nom": "Arcades de nuit", "css": "p4.css", "hero": "arches", "nouveau": True,
-        "pitch": "La mise en page « Arcades » de la proposition 1 (arches des vitrines, police actuelle), "
-                 "habillée des couleurs sombres de la proposition 3 : espresso, or et crème.",
-        "palette": ["#130d0b", "#1b1310", "#c9a96e", "#e9d6b0", "#f1e8da"],
-        "polices": "Forum (titres, police actuelle) · Jost (texte)",
-    },
-    {
-        "id": 5, "nom": "Comptoir", "css": "p5.css", "hero": "comptoir", "nouveau": True,
-        "pitch": "Un nouveau style, doux et contemporain : en-tête centré, grandes photos aux coins arrondis, "
-                 "rayons présentés comme une carte. Couleurs de la proposition 3, en un peu plus clair.",
-        "palette": ["#211813", "#2b211c", "#d0b07a", "#e6d2a8", "#f3eadc"],
-        "polices": "Fraunces (titres) · Figtree (texte)",
-    },
-    {
         "id": 6, "nom": "Site actuel", "css": "p6.css", "actuel": True,
         "pitch": "Le site tel qu'il est aujourd'hui, reproduit à l'identique ou presque (mêmes pages, textes, "
-                 "couleurs et polices) pour comparer chaque proposition avec l'existant, page par page.",
+                 "couleurs et polices) pour comparer avec la nouvelle version, page par page.",
         "palette": ["#2e1a13", "#a78957", "#ffffff", "#000000"],
         "polices": "Forum (titres) · Merriweather · Open Sans (texte) · Sora (menu)",
     },
@@ -372,94 +344,29 @@ def carte_produit(p, i):
 </article>"""
 
 
-# ---------------------------------------------------------------- héros (varie selon la proposition)
+# ---------------------------------------------------------------- héros de l'accueil
 def hero(prop):
     intro = ("Plus de 1000 références sélectionnées avec soin, souvent issues de circuits artisanaux "
              "ou locaux et dotées d'une histoire. Un lieu où l'on prend le temps de découvrir, de goûter et d'échanger.")
-    btns = f"""<div class="btn-row">
-        <a class="btn" href="produits.html">Découvrir nos produits {ICONES["fleche"]}</a>
-        <a class="btn btn-ghost" href="contact.html">Horaires & accès</a>
-      </div>"""
-    stats = """<ul class="stats">
-        <li><strong>1972</strong><span>année d'ouverture</span></li>
-        <li><strong>1000+</strong><span>références</span></li>
-        <li><strong>50</strong><span>producteurs</span></li>
-      </ul>"""
-    if prop["hero"] == "arches":
-        return f"""
-<section class="hero hero-arches">
-  <div class="container hero-grid">
-    <div class="hero-text">
-      <p class="eyebrow">Épicerie fine · Saint-Germain-en-Laye</p>
-      <h1>Le temple<br>des saveurs</h1>
-      <p class="lead">{intro}</p>
-      {btns}
-      {stats}
-    </div>
-    <div class="hero-visual">
-      <div class="arch arch-main">{img("FRANK-EPICIER-768x1024.jpg", "Frank conseille une cliente devant les huiles d'olive", loading="eager")}</div>
-      <div class="arch arch-small">{img("MARCO-POLO-VERT-V2.jpg", "Thé Marco Polo Mariage Frères", loading="eager")}</div>
-      <span class="hero-badge"><em>depuis</em>1972</span>
-    </div>
-  </div>
-</section>"""
-    if prop["hero"] == "edito":
-        return f"""
-<section class="hero hero-edito">
-  <div class="container">
-    <div class="hero-head">
-      <div>
-        <p class="eyebrow">Épicerie fine — Saint-Germain-en-Laye — depuis 1972</p>
-        <h1>Le temple <em>des saveurs</em></h1>
-      </div>
-      <div class="hero-intro">
-        <p class="lead">{intro}</p>
-        {btns}
-      </div>
-    </div>
-    <div class="hero-collage">
-      <figure class="c1">{img("FRANK-DEVANT-BOUTIQUE.jpg", "La boutique, 12 rue de Pologne", loading="eager")}<figcaption>12 rue de Pologne, à deux pas du marché</figcaption></figure>
-      <figure class="c2">{img("FRANK-EPICIER-768x1024.jpg", "Conseil en boutique", loading="eager")}<figcaption>Le conseil, avant tout</figcaption></figure>
-      <figure class="c3">{img("PARIS-MARAIS-V2.jpg", "Thé Paris Marais, Mariage Frères", loading="eager")}<figcaption>Thé Paris Marais®, Mariage Frères</figcaption></figure>
-    </div>
-    {stats}
-  </div>
-</section>"""
-    if prop["hero"] == "comptoir":
-        return f"""
-<section class="hero hero-comptoir">
-  <div class="container">
-    <div class="hc-frame">
-      {img("FRANK-DEVANT-BOUTIQUE.jpg", "La boutique, 12 rue de Pologne", "hc-bg", loading="eager")}
-      <span class="hc-pill" data-today-hours>{ico("horloge")}Du mardi au dimanche</span>
-      <div class="hc-panel">
-        <p class="eyebrow">Épicerie fine · depuis 1972</p>
-        <h1>Le temple <em>des saveurs</em></h1>
-        <p class="lead">{intro}</p>
-        {btns}
-      </div>
-    </div>
-    <div class="hc-strip">
-      {stats}
-      <div class="hc-thumbs">
-        <span>{img("PARIS-MARAIS-V2.jpg", "Thé Paris Marais")}</span>
-        <span>{img("VILLA-ZOTTOPERA-2-FORMATS-716x1024.jpg", "Huile d'olive Villa Zottopera")}</span>
-        <span>{img("GAMME-CONFITURES.jpg", "Confitures")}</span>
-        <a href="produits.html" class="hc-more">Voir les 9 rayons {ICONES["fleche"]}</a>
-      </div>
-    </div>
-  </div>
-</section>"""
     return f"""
 <section class="hero hero-nuit">
   <div class="hero-bg">{img("FRANK-DEVANT-BOUTIQUE.jpg", "", loading="eager")}</div>
   <div class="container hero-content">
     <p class="eyebrow"><span class="rule"></span>Épicerie fine · depuis 1972</p>
-    <h1>Le temple<br><em>des saveurs</em></h1>
+    <h1 class="hero-title"><span class="logo" role="img" aria-label="Le Rameau d'Olivier"></span><span class="hero-sub">Le temple <em>des saveurs</em></span></h1>
     <p class="lead">{intro}</p>
-    {btns}
+    <div class="btn-row">
+      <a class="btn" href="produits.html">Découvrir nos produits {ICONES["fleche"]}</a>
+      <a class="btn btn-ghost" href="contact.html">Horaires & accès</a>
+    </div>
   </div>
-  <div class="container hero-foot">{stats}</div>
+  <div class="container hero-foot">
+    <ul class="stats">
+      <li><strong>1972</strong><span>année d'ouverture</span></li>
+      <li><strong>1000+</strong><span>références</span></li>
+      <li><strong>50</strong><span>producteurs</span></li>
+    </ul>
+  </div>
 </section>"""
 
 
@@ -1050,7 +957,7 @@ def index_maquettes():
 <a class="choice" href="proposition-{p["id"]}/index.html">
   <span class="shot"><img src="assets/apercus/proposition-{p["id"]}.jpg" alt="Aperçu de la proposition {p["id"]}" onerror="this.remove()"></span>
   <span class="choice-body">
-    <small>{"Pour comparer" if p.get("actuel") else f"Proposition {p['id']}"}{' <b class="new">Nouveau</b>' if p.get("nouveau") else ""}</small>
+    <small>{"Pour comparer" if p.get("actuel") else "Proposition retenue"}{' <b class="new">Nouveau</b>' if p.get("nouveau") else ""}</small>
     <strong>{e(p["nom"])}</strong>
     <span class="pitch">{e(p["pitch"])}</span>
     <span class="swatches">{pastilles}</span>
@@ -1066,11 +973,11 @@ def index_maquettes():
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/css/choix.css">
 </head><body>
-<header><span class="logo"></span><p>Refonte graphique : cinq propositions et le site actuel</p></header>
+<header><span class="logo"></span><p>Refonte graphique : la proposition retenue et le site actuel</p></header>
 <main>
   <div class="choices">{cartes}</div>
   <section class="notes">
-    <h2>Ce qui change dans toutes les propositions</h2>
+    <h2>Ce qui change par rapport au site actuel</h2>
     <ul>
       <li><strong>Menu simplifié.</strong> « Accueil » disparaît (le logo y mène). « Nos produits » ouvre un grand menu illustré, regroupé en trois familles. « Nous contacter » devient un bouton « Nous rendre visite » toujours visible.</li>
       <li><strong>Navigation plus fluide.</strong> Transitions douces entre les pages, en-tête fixe, rayons accessibles en un clic depuis chaque page produit, liens « rayon précédent / suivant », fil d'Ariane.</li>
@@ -1078,7 +985,7 @@ def index_maquettes():
       <li><strong>Une vraie page « Nos produits »</strong> qui présente les neuf rayons.</li>
       <li><strong>Mise en page plus aérée.</strong> Fini les gros blocs de couleur carrés : des cartes légères, des photos mises en valeur et plus d'espace.</li>
     </ul>
-    <p class="hint">Astuce : dans chaque maquette, la pastille en bas à gauche permet de passer d'une proposition à l'autre sur la même page.</p>
+    <p class="hint">Astuce : dans chaque maquette, la pastille en bas à gauche permet de passer de la nouvelle version au site actuel sur la même page.</p>
   </section>
 </main>
 </body></html>

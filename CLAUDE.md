@@ -1,7 +1,8 @@
 # Maquettes de refonte — Le Rameau d'Olivier
 
 Maquettes HTML statiques de la refonte de https://rameau-olivier.fr/ (épicerie fine, 12 rue de Pologne,
-78100 Saint-Germain-en-Laye). Elles servent à faire valider un design avant l'implémentation d'un thème WordPress.
+78100 Saint-Germain-en-Laye). Le patron a retenu la **proposition 3 « Nuit gourmande »**, base du futur thème WordPress.
+Les autres propositions ont été supprimées ; la 6 reste comme reproduction du site actuel, pour comparer.
 
 - En ligne : https://nicownchtr.github.io/rameau-olivier-maquettes/ (GitHub Pages, branche `main`, racine du dépôt).
 - Chaque push sur `main` est publié automatiquement en 1 à 2 minutes.
@@ -23,25 +24,25 @@ Ne rien y mettre de privé : le dépôt est public.
 
 | Chemin | Rôle |
 |---|---|
-| `outils/generer.py` | **Source des pages** : en-tête, menu, pied de page, contenu de chaque page, liste des propositions (`PROPOSITIONS`), rayons (`CATEGORIES`). |
+| `outils/generer.py` | **Source des pages** : en-tête, menu, pied de page, contenu de chaque page, propositions publiées (`PROPOSITIONS` : la 3 et la 6), rayons (`CATEGORIES`). |
 | `outils/contenu.json` | Textes et produits repris du site actuel (rayons, produits, horaires…). |
 | `outils/dimensions.json` | Dimensions des images (cadrage des images très verticales). |
 | `outils/verifier.py` | Vérifie qu'aucun lien ni ressource locale n'est cassé. |
-| `assets/css/base.css` | Mise en page commune à toutes les propositions (y compris responsive). |
-| `assets/css/p1.css` … `p5.css` | Thème de chaque proposition (couleurs, polices, variantes). `p4.css` importe `p1.css`. |
+| `assets/css/base.css` | Mise en page de la proposition retenue (y compris responsive). |
+| `assets/css/p3.css` | Thème « Nuit gourmande » : couleurs, polices, héros de l'accueil. |
 | `assets/css/p6.css` | **Site actuel** reproduit pour comparaison (fonctions `a_*` de `generer.py`). Feuille autonome : `base.css` n'est pas chargée. |
-| `assets/css/switch.css` | Sélecteur de proposition (pastille en bas), commun aux 6. |
-| `assets/css/choix.css` | Page d'accueil des maquettes (choix de la proposition). |
+| `assets/css/switch.css` | Sélecteur « 3 / Actuel » (pastille en bas). |
+| `assets/css/choix.css` | Page d'accueil des maquettes (proposition retenue et site actuel). |
 | `assets/js/site.js` | Interactions : horaires du jour, menu mobile, en-tête collant, carrousel, « Lire la suite », sélecteur de proposition. |
 | `assets/img/`, `assets/fonts/` | Images du site actuel et polices locales. |
-| `proposition-N/*.html`, `index.html` | **Fichiers générés** : ne jamais les modifier à la main. |
+| `assets/apercus/` | Vignettes de la page de choix (capture 1440 × 990 de l'accueil, sans la pastille). |
+| `proposition-3/*.html`, `proposition-6/*.html`, `index.html` | **Fichiers générés** : ne jamais les modifier à la main. |
 
 ## Faire une modification
 
 1. Modifier la source : `outils/generer.py` ou `outils/contenu.json` pour la structure ou le texte,
    `assets/css/*.css` pour l'apparence, `assets/js/site.js` pour les comportements.
-   - Ce qui est commun à toutes les propositions va dans `base.css`.
-   - Ce qui est propre à une proposition va dans son `pN.css`.
+   - La mise en page va dans `base.css`, les couleurs, polices et le héros dans `p3.css`.
 2. Si `outils/` a changé, régénérer depuis la racine : `python3 outils/generer.py`.
 3. Vérifier les liens : `python3 outils/verifier.py`. Il doit afficher 0 lien cassé.
 4. Pour un changement visuel, contrôler le rendu :
@@ -71,5 +72,4 @@ Ne rien y mettre de privé : le dépôt est public.
 - En-tête collant :
   - il ne doit jamais changer de hauteur dans le flux de la page, sinon le contenu saute au défilement ;
   - utiliser `--header-shrink` (top négatif) et des `transform`.
-- Les propositions 1 à 5 partagent `base.css` : après un changement commun, jeter un œil aux 5.
 - La proposition 6 reproduit le site actuel : ne pas l'« améliorer », elle doit rester fidèle à rameau-olivier.fr.

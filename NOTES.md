@@ -6,10 +6,10 @@ commit que la modification qui va avec.
 
 ## État actuel
 
-- Les 5 propositions sont en ligne. On attend que le patron en choisisse une.
-  - 1 Arcades, 2 Lin & caramel, 3 Nuit gourmande, 4 Arcades de nuit, 5 Comptoir.
+- **Le patron a choisi la proposition 3 « Nuit gourmande »** (2026-11-16). C'est la base du thème WordPress.
+  - Les propositions 1, 2, 4 et 5 sont supprimées (récupérables dans l'historique git, commit 2509239). L'ancienne 6 « Étiquettes » aussi (commit 2e834f1).
   - La 6 (« Actuel » dans le sélecteur) reproduit le site actuel, pour comparer page par page. Elle doit rester fidèle à rameau-olivier.fr.
-  - L'ancienne 6 « Étiquettes » est retirée (récupérable dans l'historique git, commit 2e834f1).
+  - Accueil : le logo remplace le titre, « Le temple des saveurs » devient un sous-titre ; la photo de la boutique est à droite (au-dessus du texte sur mobile) pour que le texte ne cache jamais le patron.
 - La suite attend aussi :
   - l'archive du site WordPress (Duplicator, ou FTP + dump SQL) ;
   - la vérification que l'offre Ikoula permet un sous-domaine et une deuxième base de données, pour la préproduction.
@@ -19,7 +19,8 @@ commit que la modification qui va avec.
 
 - Menu : « **Cadeaux d'entreprise** », jamais « Cadeaux » seul. Le propriétaire y tient.
 - Adresse : 12 rue de Pologne. 1972 est l'année d'ouverture.
-- Garder le logo.
+- Garder le logo. Sur l'accueil, le logo sert de titre, avec « Le temple des saveurs » en sous-titre.
+- Le texte de l'accueil ne doit pas recouvrir le patron sur la photo.
 - Éviter le côté « vieillot » du site actuel : gros blocs carrés de couleur, mises en page basiques. La navigation doit être fluide.
 - Vérifier chaque changement visuel sur ordinateur (1440 px) et sur mobile (390 px).
 - Reproduire un bug avant de le corriger.
@@ -43,6 +44,7 @@ commit que la modification qui va avec.
 
 Une ligne par demande, la plus récente en haut : `AAAA-MM-JJ — demande → ce qui a été fait / décidé`.
 
+- 2026-11-16 — Le patron choisit la 3 ; logo à la place du titre de l'accueil, texte qui ne cache plus le patron, suppression des autres maquettes → logo + sous-titre « Le temple des saveurs », photo du héros à droite (au-dessus sur mobile), propositions 1, 2, 4, 5 retirées avec leurs CSS, polices et aperçus. La 6 (site actuel) est gardée pour comparer.
 - 2026-11-12 — Remplacer la maquette 6 par le site actuel → proposition 6 = reproduction de rameau-olivier.fr (mêmes pages, textes, couleurs, polices Forum/Merriweather/Open Sans/Sora, menu déroulant, tiroir). « Étiquettes » retirée. Sélecteur déplacé dans `switch.css`.
 - 2026-11-12 — Synchroniser la mémoire entre le local et le cloud → ce fichier, chargé par `CLAUDE.md`. En local, faire `git pull` en début de session.
 - 2026-11-06 — (session cloud) Proposition 6 « Étiquettes » : vert olive, store banne, étiquettes, polices Bricolage Grotesque + Instrument Serif, héros en tirages photo avec tampon tournant et bandeau défilant des rayons.

@@ -47,19 +47,23 @@ h1 em, h2 em { font-style: italic; color: var(--accent); }
 .nav-list > li > a[aria-current], .nav-list > li > a:hover { color: var(--accent); }
 .topbar a:hover { color: var(--ink); }
 
-/* --- héros plein écran --- */
+/* --- héros : photo de la boutique à droite, logo et texte à gauche ---
+   La photo n'occupe que la partie droite pour que le texte ne passe jamais sur le patron. */
 .hero-nuit { position: relative; min-height: min(86vh, 860px); display: grid; grid-template-rows: 1fr auto; isolation: isolate; overflow: hidden; }
-.hero-bg { position: absolute; inset: 0; z-index: -1; }
-.hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 56%; filter: saturate(.9) contrast(1.05); }
+.hero-bg { position: absolute; inset: 0 0 0 auto; width: 62%; z-index: -1; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; filter: saturate(.9) contrast(1.05); }
 .hero-bg::after {
   content: ""; position: absolute; inset: 0;
   background:
-    linear-gradient(90deg, rgba(27, 19, 16, .97) 0%, rgba(27, 19, 16, .86) 38%, rgba(27, 19, 16, .25) 75%, rgba(27, 19, 16, .15) 100%),
+    linear-gradient(90deg, rgba(27, 19, 16, 1) 0%, rgba(27, 19, 16, .7) 16%, rgba(27, 19, 16, .15) 40%, rgba(27, 19, 16, .1) 100%),
     linear-gradient(0deg, rgba(27, 19, 16, 1) 0%, rgba(27, 19, 16, 0) 30%);
 }
-.hero-content { align-self: center; padding-block: clamp(56px, 8vw, 110px) 2rem; }
-.hero-content > * { max-width: 620px; }
+.hero-content { align-self: center; padding-block: clamp(56px, 7vw, 96px) 2rem; }
+.hero-content > * { max-width: min(560px, 46vw); }
 .hero-content .lead { color: rgba(241, 232, 218, .8); }
+.hero .hero-title { display: grid; justify-items: start; gap: 1.1rem; margin: 0 0 1.75rem; font-size: 1rem; line-height: 1; }
+.hero-title .logo { --logo: var(--ink); width: clamp(260px, 32vw, 460px); }
+.hero-sub { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.5rem, 2.4vw, 2.1rem); line-height: 1.15; color: var(--ink); }
 .eyebrow .rule { display: inline-block; width: 40px; height: 1px; background: var(--accent); vertical-align: middle; margin-right: 1rem; }
 .hero-foot .stats { margin: 0; padding-block: 1.75rem 2.5rem; border-top: 1px solid var(--line); }
 .hero-foot .stats strong { color: var(--accent); }
@@ -107,6 +111,12 @@ h1 em, h2 em { font-style: italic; color: var(--accent); }
 .maquette-switch a, .maquette-switch .ms-close { color: #1b1310; }
 .ms-links a[aria-current] { background: #1b1310; color: #f1e8da; }
 
+/* Mobile et tablette : la photo passe au-dessus du texte, en pleine largeur. */
 @media (max-width: 960px) {
-  .hero-bg::after { background: linear-gradient(0deg, rgba(27, 19, 16, 1) 0%, rgba(27, 19, 16, .82) 55%, rgba(27, 19, 16, .45) 100%); }
+  .hero-nuit { min-height: 0; grid-template-rows: auto auto auto; }
+  .hero-bg { position: relative; inset: auto; width: auto; height: clamp(320px, 80vw, 560px); }
+  .hero-bg img { object-position: 50% 45%; }
+  .hero-bg::after { background: linear-gradient(0deg, rgba(27, 19, 16, 1) 0%, rgba(27, 19, 16, .6) 18%, rgba(27, 19, 16, 0) 42%); }
+  .hero-content { padding-top: 0; margin-top: -3.5rem; }
+  .hero-content > * { max-width: 620px; }
 }
